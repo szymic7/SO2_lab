@@ -1,0 +1,23 @@
+
+services:
+  backend:
+    build: .
+    container_name: backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=mongodb://mongo_db:27017
+    depends_on:
+      - mongo_db
+
+  mongo_db:
+    image: mongo:4.4
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_volume:/data/db
+
+volumes:
+  mongo_volume:
+
